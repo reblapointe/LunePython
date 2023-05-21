@@ -41,9 +41,9 @@ def main():
     print("Entrez une date pour voir l'état de la lune. Pour quitter, entrez Q")
 
     # Lire les trois nombres
-    jour = int(input("Entrez un jour"))
-    mois = int(input("Entrez un mois"))
-    annee = int(input("Entrez une annee"))
+    jour = int(input("Entrez un jour "))
+    mois = int(input("Entrez un mois "))
+    annee = int(input("Entrez une annee "))
     
     if est_date_valide(jour, mois, annee):
         age = age_lune(jour, mois, annee)

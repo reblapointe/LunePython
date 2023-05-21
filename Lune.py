@@ -21,7 +21,7 @@ def age_lune(jour: int, mois: int, annee: int) -> float:
         age += CYCLE_LUNAIRE
     return age
 
-def est_dans_cercle(rangee: int, colonne: int, diametre: int) -> bool:
+def est_dans_cercle(rangee: int, colonne: int, diametre: float) -> bool:
     rayon = diametre / 2
     x = rangee - rayon
     y = colonne - rayon
@@ -54,7 +54,7 @@ def dessiner_lune(age: float, hemisphere_nord: bool = True):
         print()
 
 def est_illuminee(position:float, largeur:int, luminosite:float, droite_eclairee: bool) -> bool:
-    return droite_eclairee and (largeur - position) // largeur < luminosite or not droite_eclairee and (position / largeur < luminosite)
+    return droite_eclairee and (largeur - position) / largeur < luminosite or not droite_eclairee and (position / largeur < luminosite)
 
 def luminosite(age: float) -> float :
     if est_croissante(age):
