@@ -1,4 +1,8 @@
-from Lune import *
+"""
+    Affiche un dessin de la lune, telle que vu aujourd'hui, puis à une date choisie par l'utilisateur, dans le ciel de l'hémisphère nord
+"""
+
+from lune.phase import *
 from datetime import datetime
 
 def main():
