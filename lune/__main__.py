@@ -1,5 +1,5 @@
 """
-    Affiche un dessin de la lune, telle que vu aujourd'hui, puis à une date choisie par l'utilisateur, dans le ciel de l'hémisphère nord
+    Affiche un dessin de la lune, telle que vu aujourd'hui, puis à une date choisie par l'utilisateur, dans le ciel de l'hémisphère nord.
 """
 
 
@@ -22,13 +22,13 @@ def main():
         print('-------------------------------------------------------------------')
         print('Entrez une date pour voir l\'état de la lune. Pour quitter, entrez Q')
 
-        try : 
+        try: 
             # Lire les trois nombres
             jour = int(input('Entrez un jour '))
             mois = int(input('Entrez un mois '))
             annee = int(input('Entrez une annee '))
             if est_date_valide(jour, mois, annee):
-                decrire_lune(jour,mois,annee)
+                decrire_lune(jour, mois, annee)
                 print()
             else:
                 print('Ceci n\'est pas une date.')

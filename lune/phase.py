@@ -47,7 +47,7 @@ def age_lune(jour: int, mois: int, annee: int) -> float:
             annee (int): L'année.
 
         Return:
-            float : L'âge de la lune en jours.
+            float: L'âge de la lune en jours.
     """
     date_nouvelle_lune_connue = jour_julien(13, 1, 2021)
     jours_depuis = jour_julien(jour, mois, annee) - date_nouvelle_lune_connue
@@ -58,11 +58,11 @@ def est_croissante(age: float) -> bool:
     """
     Vérifie si la lune est dans sa phase croissante. La lune croit dans la première moitié de son cycle, puis elle décroit.
 
-        Paramètres :
-            age (float) : L'âge de la lune en jours.
+        Parameters:
+            age (float): L'âge de la lune en jours.
 
-        Retour :
-            bool : True si la lune est dans sa phase croissante, False sinon.
+        Returns
+            bool: True si la lune est dans sa phase croissante, False sinon.
     """
     return age < CYCLE_LUNAIRE / 2
 
@@ -71,11 +71,11 @@ def dessiner_lune(age: float, hemisphere_nord: bool = True):
     """
     Dessine une représentation graphique de la lune en fonction de son âge.
 
-        Parameters :
+        Parameters:
             age (float): L'âge de la lune en jours.
             hemisphere_nord (bool): Indique si on doit représenter la lune telle que vue dans l'hémisphère nord, ou. Par défaut, True.
 
-        Returns :
+        Returns:
             None
     """
     TAILLE_DESSIN = 21
@@ -83,29 +83,52 @@ def dessiner_lune(age: float, hemisphere_nord: bool = True):
     droite_eclairee = est_croissante(age) ^ (not hemisphere_nord)
 
     for i in range(TAILLE_DESSIN + 1):
-        largeur = corde_horizontale(TAILLE_DESSIN, i) #Largeur du cercle lunaire à la ligne i
+        largeur = corde_horizontale(TAILLE_DESSIN, i) # Largeur du cercle lunaire à la ligne i
         for j in range(TAILLE_DESSIN + 1):
             if est_dans_cercle(i, j, TAILLE_DESSIN):
-                decalage = (TAILLE_DESSIN - largeur) / 2
+                decalage = (TAILLE_DESSIN - largeur) / 2 # début gauche du cercle lunaire
                 if est_illuminee(j - decalage, largeur, lum, droite_eclairee):
-                    c = '██'
+                    c = '██' # portion illuminée
                 else:
-                    c = '  '
+                    c = '  ' # portion sombre
             else:
-                c = '··'
+                c = '··' # voûte céleste
             print(c, end = '')
         print()
 
+    # Example: Pour une lune de 5 jours (premier croissant, illuminée à 31%)
+    #        ············································
+    #        ··············          ██████··············
+    #        ··········                ████████··········
+    #        ········                    ████████········
+    #        ······                      ██████████······
+    #        ····                        ████████████····
+    #        ····                        ████████████····
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ··                            ████████████··
+    #        ····                        ████████████····
+    #        ······                      ██████████······
+    #        ········                    ████████········
+    #        ··········                ████████··········
+    #        ··············          ██████··············
+    #        ············································
+        
 
 def est_illuminee(position:int, largeur:int, luminosite:float, droite_eclairee: bool) -> bool:
     """
     Vérifie si une position dans la représentation graphique de la lune est éclairée pour une largeur de dessin.
 
         Parameters:
-            position (int): La position à vérifier à partir du début de la lune à gauche
-            largeur (int): La largeur de la lune
+            position (int): La position à vérifier à partir du début de la lune à gauche.
+            largeur (int): La largeur de la lune.
             luminosite (float): La luminosité de la lune.
-            droite_eclairee (bool): Indique si la droite ou la gauche de la lune est éclairée
+            droite_eclairee (bool): Indique si la droite ou la gauche de la lune est éclairée.
 
         Returns:
             bool: True si la position est éclairée, False sinon.
@@ -116,7 +139,7 @@ def est_illuminee(position:int, largeur:int, luminosite:float, droite_eclairee: 
         return position / largeur < luminosite
 
 
-def luminosite(age: float) -> float :
+def luminosite(age: float) -> float:
     """
     Calcule la luminosité de la lune en fonction de son âge.
     La luminosité minimale est 0 à la nouvelle lune.
@@ -125,7 +148,7 @@ def luminosite(age: float) -> float :
         Parameters:
             age (float): L'âge de la lune en jours.
 
-        Returns :
+        Returns:
             float: La luminosité de la lune.
     """
     mi_lune = CYCLE_LUNAIRE / 2
@@ -143,7 +166,7 @@ def phase(age: float) -> str:
             age (float): L'âge de la lune en jours.
 
         Returns:
-            str: le nom de la phase de la lune
+            str: le nom de la phase de la lune.
     """
     l = luminosite(age)
     croissante = est_croissante(age)
@@ -170,7 +193,7 @@ def decrire_lune(jour: int, mois: int, annee: int):
             mois (int): Le mois.
             annee (int): L'année.
 
-        Returns :
+        Returns:
             None
     """
     age = age_lune(jour, mois, annee)
