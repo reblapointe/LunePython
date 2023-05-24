@@ -18,7 +18,8 @@
 
         def jour_julien(jour: int, mois: int, annee: int) -> int:
             Calcule le jour julien correspondant à une date donnée.
-            C'est le nombre de jours écoulés depuis le 1er janvier de l'année -4712 à midi (heure universelle). 
+            C'est le nombre de jours écoulés depuis le 1er janvier de l'année -4712 à midi 
+            (heure universelle). 
 """
 
 
@@ -68,22 +69,23 @@ def est_date_valide(jour: int, mois: int, annee: int) -> bool:
         Returns:
             bool: True si la date est valide, False sinon.
     """
-    return 1 <= jour <= nb_jours_dans_mois(annee, mois) and 1 <= mois <= 12     
+    return 1 <= jour <= nb_jours_dans_mois(annee, mois) and 1 <= mois <= 12
 
 
 def jour_julien(jour: int, mois: int, annee: int) -> int:
     """
     Calcule le jour julien correspondant à une date donnée.
-    Le jour julien initial est le 1er janvier de l'année -4712 (4713 avant notre ère) à midi (heure universelle). 
+    Le jour julien initial est le 1er janvier de l'année -4712 (4713 avant notre ère)
+    à midi (heure universelle). 
 
         Parameters:
             jour (int): Le jour.
             mois (int): Le mois.
             annee (int): L'année.
-
+    
         Returns:
             int: Le jour julien correspondant à la date spécifiée.
     """
-    return (1461 * (annee + 4800 + (mois - 14) // 12) // 4 + 367 * 
-            (mois - 2 - 12 * ((mois - 14) // 12)) // 12 - 3 * 
-            ((annee + 4900 + (mois - 14) // 12) // 100) // 4 + jour - 32075)
+    return (1461 * (annee + 4800 + (mois - 14)//12) // 4 + 367 
+            * (mois - 2 - 12 * ((mois - 14)//12)) // 12 - 3 
+            * ((annee + 4900 + (mois - 14)//12) // 100) // 4 + jour - 32075)

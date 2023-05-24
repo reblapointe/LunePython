@@ -28,8 +28,8 @@
 """
 
 
-from lune.date import *
-from lune.cercle import *
+import lune.date as date
+import lune.cercle as cercle
 
 
 """ Durée du cycle lunaire """
@@ -49,8 +49,8 @@ def age_lune(jour: int, mois: int, annee: int) -> float:
         Return:
             float: L'âge de la lune en jours.
     """
-    date_nouvelle_lune_connue = jour_julien(13, 1, 2021)
-    jours_depuis = jour_julien(jour, mois, annee) - date_nouvelle_lune_connue
+    date_nouvelle_lune_connue = date.jour_julien(13, 1, 2021)
+    jours_depuis = date.jour_julien(jour, mois, annee) - date_nouvelle_lune_connue
     return jours_depuis % CYCLE_LUNAIRE
 
 
@@ -83,17 +83,17 @@ def dessiner_lune(age: float, hemisphere_nord: bool = True):
     droite_eclairee = est_croissante(age) ^ (not hemisphere_nord)
 
     for i in range(TAILLE_DESSIN + 1):
-        largeur = corde_horizontale(TAILLE_DESSIN, i) # Largeur du cercle lunaire à la ligne i
+        largeur = cercle.corde_horizontale(TAILLE_DESSIN, i) # Largeur du cercle lunaire à la ligne i
         for j in range(TAILLE_DESSIN + 1):
-            if est_dans_cercle(i, j, TAILLE_DESSIN):
+            if cercle.est_dans_cercle(i, j, TAILLE_DESSIN):
                 decalage = (TAILLE_DESSIN - largeur) / 2 # début gauche du cercle lunaire
                 if est_illuminee(j - decalage, largeur, lum, droite_eclairee):
-                    c = '██' # portion illuminée
+                    c = "██" # portion illuminée
                 else:
-                    c = '  ' # portion sombre
+                    c = "  " # portion sombre
             else:
-                c = '··' # voûte céleste
-            print(c, end = '')
+                c = "··" # voûte céleste
+            print(c, end = "")
         print()
 
     # Example: Pour une lune de 5 jours (premier croissant, illuminée à 31%)
@@ -122,7 +122,8 @@ def dessiner_lune(age: float, hemisphere_nord: bool = True):
 
 def est_illuminee(position:int, largeur:int, luminosite:float, droite_eclairee: bool) -> bool:
     """
-    Vérifie si une position dans la représentation graphique de la lune est éclairée pour une largeur de dessin.
+    Vérifie si une position dans la représentation graphique de la lune est éclairée 
+    pour une largeur de dessin.
 
         Parameters:
             position (int): La position à vérifier à partir du début de la lune à gauche.
@@ -172,15 +173,15 @@ def phase(age: float) -> str:
     croissante = est_croissante(age)
     
     if l < 0.04:
-        p = 'nouvelle lune'
+        p = "nouvelle lune"
     elif l < 0.35:
-        p = 'premier croissant' if croissante else 'dernier croissant'
+        p = "premier croissant" if croissante else "dernier croissant"
     elif l < 0.66:
-        p = 'premier quartier' if croissante else 'dernier quartier'
+        p = "premier quartier" if croissante else "dernier quartier"
     elif l < 0.96:
-        p = 'gibbeuse croissante' if croissante else 'gibbeuse décroissante'
+        p = "gibbeuse croissante" if croissante else "gibbeuse décroissante"
     else:
-        p = 'pleine lune' 
+        p = "pleine lune" 
     return p
 
 
@@ -199,8 +200,8 @@ def decrire_lune(jour: int, mois: int, annee: int):
     age = age_lune(jour, mois, annee)
     l = luminosite(age)
     p = phase(age)
-    print(f'En date du {jour}/{mois}/{annee}, à minuit heure locale.')
-    print(f'La lune a {round(age)} jour(s).')
+    print(f"En date du {jour}/{mois}/{annee}, à minuit heure locale.")
+    print(f"La lune a {round(age)} jour(s).")
     print(f'Elle est dans sa phase "{p}". ({round(l * 100)}% illuminée)')
     dessiner_lune(age)
     print()
